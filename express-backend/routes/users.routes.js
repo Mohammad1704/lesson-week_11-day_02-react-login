@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/api/login", (req, res) => {
   if (req.body.username && req.body.password) {
     // Find the user based on their username in our database
+
     models.Person.findOne({
       where: { username: req.body.username }
     })
