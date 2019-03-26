@@ -6,13 +6,13 @@ export function setJwt(token) {
   localStorage.setItem(tokenKey, token);
 }
 
-// export function getJwt() {
-//   return localStorage.getItem(tokenKey);
-// }
+export function getJwt() {
+  return localStorage.getItem(tokenKey);
+}
 
 export function getUser() {
   try {
-    const token = localStorage.getItem(tokenKey);
+    const token = getJwt();
     return jwtDecode(token);
   } catch (ex) {
     console.log(ex);

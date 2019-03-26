@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
-import { getUser } from "./services/AuthService";
+import { getUser, logout } from "./services/AuthService";
 import LoginForm from "./components/LoginForm";
+import Profile from "./components/Profile";
+import Articles from "./components/Articles";
 
 class App extends Component {
   state = {
@@ -19,12 +21,20 @@ class App extends Component {
   onLogin = () => {
     this.setState({ user: getUser() });
   };
+  onLogout = () => {
+    logout();
+    this.setState({ user: null });
+    console.log("this button works");
+  };
   render() {
     return (
       <div className="container-fluid">
         <div className="container">
           {this.state.user ? (
-            <h1>profile</h1>
+            <div>
+              <Profile user={this.state.user} onLogout={this.onLogout} />
+              <Articles />
+            </div>
           ) : (
             <LoginForm onLogin={this.onLogin} />
           )}
